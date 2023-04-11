@@ -1,0 +1,23 @@
+apiVersion: core.oam.dev/v1alpha1
+kind: Policy
+metadata:
+  name: override
+type: override
+properties:
+  components:
+  - name: nginx
+    traits:
+    - type: scaler
+      properties:
+        replicas: 2
+    - type: container-image
+      properties:
+        containers:
+          - containerName: nginx
+            image: nginx:0.0.1
+            imagePullPolicy: IfNotPresent
+    - type: gateway
+      properties:
+        domain: nginx.qa.com
+        http:
+          "/": 8000

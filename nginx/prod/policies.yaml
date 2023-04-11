@@ -1,0 +1,28 @@
+apiVersion: core.oam.dev/v1alpha1
+kind: Policy
+metadata:
+  name: override
+type: override
+properties:
+  components:
+  - name: "nginx"
+    traits:
+    - type: scaler
+      properties:
+        replicas: 4
+    - type: container-image
+      properties:
+        containers:
+          - containerName: nginx
+            image: nginx:1.0.0
+            imagePullPolicy: IfNotPresent
+    - type: gateway
+      properties:
+        domain: www.prod.com
+        http:
+          "/api": 8000
+    - type: gateway
+      properties:
+        domain: api.prod.com
+        http:
+          "/home": 8000

@@ -1,0 +1,9 @@
+apiVersion: core.oam.dev/v1alpha1
+kind: Workflow
+metadata:
+  name: deploy
+steps:
+  - type: deploy
+    name: deploy
+    properties:
+      policies: ["override"]
