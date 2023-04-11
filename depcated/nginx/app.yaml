@@ -24,8 +24,7 @@ spec:
         - containerPort: 8000
           name: port-8000
           protocol: TCP
-
--
+          
 ---
 ## From the trait gateway 
 apiVersion: v1
@@ -43,24 +42,3 @@ spec:
   selector:
     app: nginx
 
----
-## From the trait gateway 
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  labels:
-    app: nginx
-  name: nginx
-  namespace: default
-spec:
-  rules:
-  - host: nginx.old.qa.com
-    http:
-      paths:
-      - backend:
-          serviceName: nginx
-          servicePort: 8000
-        path: /
-        pathType: ImplementationSpecific
